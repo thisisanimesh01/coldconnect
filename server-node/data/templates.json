@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Internship Template",
+    "tags": ["intern", "internship", "student", "fresher"],
+    "subject": "Application for Internship at {company}",
+    "body": "Hello {company},\n\nMy name is {your_name}. I am writing to express my interest in the {role} internship position at your organization.\n\nI have hands-on experience in {skills} and I am actively working on projects like {why}. I would be grateful for an opportunity to contribute and learn.\n\nAttached is my resume for your reference.\n\nRegards,\n{your_name}\n"
+  },
+  {
+    "id": 2,
+    "name": "Developer Role Template",
+    "tags": ["developer", "software", "backend", "frontend", "engineer"],
+    "subject": "Applying for {role} at {company}",
+    "body": "Hi {company} Team,\n\nMy name is {your_name}, and I am applying for the {role} position. I have strong skills in {skills}, and I have built multiple real-world applications including {why}.\n\nI would love the chance to contribute to your engineering team.\n\nRegards,\n{your_name}\n"
+  },
+  {
+    "id": 3,
+    "name": "Research Opportunity Template",
+    "tags": ["research", "lab", "professor", "scholar"],
+    "subject": "Research Collaboration Request - {role}",
+    "body": "Respected {company},\n\nMy name is {your_name}. I am deeply interested in your work related to {role}. I have skills in {skills} and am working on projects such as {why}.\n\nI would be honored to collaborate or assist in your research.\n\nRegards,\n{your_name}\n"
+  },
+  {
+    "id": 4,
+    "name": "Startup Friendly Template",
+    "tags": ["startup", "founder", "cofounder", "team"],
+    "subject": "Interested in Contributing to {company}",
+    "body": "Hey {company} Team,\n\nI'm {your_name}. I love what you're building! I specialize in {skills}, and I am currently working on {why}.\n\nI’d be super excited to contribute in any way possible as a {role}.\n\nRegards,\n{your_name}\n"
+  },
+  {
+    "id": 5,
+    "name": "Follow-Up Template",
+    "tags": ["followup"],
+    "subject": "Following Up on My Application for {role}",
+    "body": "Hello {company},\n\nI hope you're doing well. I wanted to kindly follow up regarding my application for the {role} position. I remain very enthusiastic about contributing my skills in {skills}.\n\nPlease let me know if you need any additional details.\n\nRegards,\n{your_name}\n"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Internship Template",
+    "tags": ["intern", "internship", "student", "fresher"],
+    "subject": "Application for {role} Internship at {company}",
+    "body": "Hello {company} Team,\n\nMy name is {your_name}, and I am currently exploring opportunities to apply my technical skills in a real-world environment. I am writing to express my interest in the {role} internship position at {company}.\n\nI have been actively developing projects using {skills}, and I am currently working on {why}. Through these experiences, I have gained practical exposure to building and solving real problems with technology.\n\nI would greatly appreciate the opportunity to learn from your team and contribute wherever possible.\n\nPlease find my resume attached for your reference. I would be grateful for the opportunity to discuss how I could contribute to your team.\n\nThank you for your time and consideration.\n\nBest regards,\n{your_name}\n"
+  },
+  {
+    "id": 2,
+    "name": "Developer Role Template",
+    "tags": ["developer", "software", "backend", "frontend", "engineer"],
+    "subject": "Application for {role} Position at {company}",
+    "body": "Hi {company} Team,\n\nMy name is {your_name}, and I am reaching out to express my interest in the {role} position at {company}.\n\nI have strong experience working with {skills}, and I have developed multiple real-world projects including {why}. Through these projects, I have focused on building scalable solutions, writing clean code, and solving practical problems.\n\nI am very interested in contributing my technical skills and learning from the talented engineers at {company}.\n\nI have attached my resume for your review and would be happy to discuss how I can contribute to your team.\n\nThank you for your time.\n\nBest regards,\n{your_name}\n"
+  },
+  {
+    "id": 3,
+    "name": "Research Opportunity Template",
+    "tags": ["research", "lab", "professor", "scholar"],
+    "subject": "Research Collaboration Inquiry – {role}",
+    "body": "Respected {company},\n\nMy name is {your_name}, and I am writing to express my interest in potential research opportunities related to {role}.\n\nI have been actively developing skills in {skills} and working on projects such as {why}. My primary interest lies in exploring innovative applications of technology and contributing to meaningful research.\n\nI greatly admire the work being done by your group and would be honored to assist or collaborate in any ongoing or upcoming research initiatives.\n\nPlease let me know if there might be an opportunity to contribute or learn under your guidance.\n\nThank you for your time and consideration.\n\nSincerely,\n{your_name}\n"
+  },
+  {
+    "id": 4,
+    "name": "Startup Friendly Template",
+    "tags": ["startup", "founder", "cofounder", "team"],
+    "subject": "Excited About What {company} Is Building",
+    "body": "Hello {company} Team,\n\nMy name is {your_name}, and I recently came across {company}. I was really impressed by what your team is building.\n\nI specialize in {skills}, and I am currently working on projects such as {why}. I enjoy building products, experimenting with new ideas, and solving real-world problems through technology.\n\nIf there is an opportunity to contribute as a {role}, I would love to support your team and help move the product forward.\n\nI have attached my resume and would be happy to connect if this aligns with your needs.\n\nLooking forward to hearing from you.\n\nBest regards,\n{your_name}\n"
+  },
+  {
+    "id": 5,
+    "name": "Follow-Up Template",
+    "tags": ["followup"],
+    "subject": "Following Up on My {role} Application",
+    "body": "Hello {company} Team,\n\nI hope you are doing well.\n\nI wanted to kindly follow up regarding my previous message about the {role} opportunity at {company}. I remain very interested in contributing my experience in {skills} and continuing to work on projects like {why}.\n\nI completely understand that you may have a busy schedule, but I would greatly appreciate any update regarding the opportunity.\n\nThank you again for your time and consideration.\n\nBest regards,\n{your_name}\n"
+  }
+]
