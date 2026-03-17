@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Response
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from email_sender import send_email_process
-from tracking_pixel import pixel_router
+from template_selector import choose_template
 
 app = FastAPI()
 
@@ -12,11 +13,42 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(pixel_router)
+class EmailRequest(BaseModel):
+    company: str
+    email: str
+    role: str
+
+
+@app.post("/preview")
+def preview_email(data: EmailRequest):
+    template = choose_template(data.role)
+
+    placeholders = {
+        "company": data.company,
+        "your_name": "Animesh Yadav",
+        "role": data.role,
+        "skills": "Python, C++, Rust, AI/ML",
+        "why": "my ongoing AI/ML personal projects"
+    }
+
+    body = template["body"]
+    subject = template["subject"]
+
+    for k, v in placeholders.items():
+        body = body.replace("{" + k + "}", v)
+        subject = subject.replace("{" + k + "}", v)
+
+    return {
+        "subject": subject,
+        "body": body,
+        "email": data.email
+    }
+
 
 @app.post("/send-email")
-async def send_email(data: dict):
-    return send_email_process(data)
+def send_email(data: EmailRequest):
+    return send_email_process(data.dict())
+
 
 @app.get("/")
 def home():

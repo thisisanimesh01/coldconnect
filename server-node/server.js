@@ -1,19 +1,19 @@
 import express from "express";
 import cors from "cors";
-import templatesRoute from "./routes/templates.js";
-import historyRoute from "./routes/history.js";
-import sendRoute from "./routes/send.js";
-import dotenv from "dotenv";
+import sendRoutes from "./routes/send.js";
 
-dotenv.config();
 const app = express();
 
-app.use(cors({ origin: "*" }));  // ← ADD THIS LINE
-
+app.use(cors());
 app.use(express.json());
 
-app.use("/api/templates", templatesRoute);
-app.use("/api/history", historyRoute);
-app.use("/api/send", sendRoute);
+app.use("/send", sendRoutes);
 
-app.listen(5001, () => console.log("Node server running on 5001"));
+app.listen(5001, () => {
+  console.log("Node server running on 5001");
+});
+
+app.use((req, res, next) => {
+  console.log("Incoming request:", req.method, req.url);
+  next();
+});

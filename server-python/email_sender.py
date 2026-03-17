@@ -6,8 +6,7 @@ import uuid
 import datetime
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-history_path = os.path.join(BASE_DIR, "data", "history.json")
+history_path = "data/history.json"
 
 
 def write_history(entry):
@@ -24,19 +23,13 @@ def write_history(entry):
         json.dump(history, f, indent=2)
 
 
-def send_email_process(data):
+# 🔥 NEW: Single source of truth
+def generate_email_content(data):
     company = data["company"]
-    email = data["email"]
     role = data["role"]
 
     template = choose_template(role)
     resume = select_resume(role)
-
-    # convert resume path to absolute path
-    if resume:
-        resume = os.path.join(BASE_DIR, resume)
-
-    print("Resume path:", resume)
 
     placeholders = {
         "company": company,
@@ -50,20 +43,12 @@ def send_email_process(data):
     for k, v in placeholders.items():
         body = body.replace("{" + k + "}", v)
 
+    # Convert to HTML
     body = body.replace("\n", "<br>")
-
     body = f"""
     <html>
-    <body style="font-family: Arial, sans-serif; line-height:1.6; font-size:14px; color:#333;">
-
+    <body style="font-family: Arial, sans-serif; line-height:1.6; font-size:14px;">
     {body}
-
-    <br><br>
-
-    <p>
-    Regards,<br>
-    <b>Animesh Yadav</b>
-    </p>
 
     </body>
     </html>
@@ -73,18 +58,36 @@ def send_email_process(data):
     for k, v in placeholders.items():
         subject = subject.replace("{" + k + "}", v)
 
+    return {
+        "subject": subject,
+        "body": body,
+        "resume": os.path.basename(resume) if resume else None,
+        "resume_path": resume
+    }
+
+
+def send_email_process(data):
+    email = data["email"]
+
+    content = generate_email_content(data)
+
     email_id = str(uuid.uuid4())
     pixel_url = f"http://127.0.0.1:8000/open/{email_id}"
 
-    msg_id = send_gmail(email, subject, body, resume, pixel_url)
+    msg_id = send_gmail(
+        email,
+        content["subject"],
+        content["body"],
+        content["resume_path"],
+        pixel_url
+    )
 
     entry = {
         "id": email_id,
-        "company": company,
-        "role": role,
+        "company": data["company"],
+        "role": data["role"],
         "email": email,
-        "template": template["name"],
-        "resume": os.path.basename(resume) if resume else None,
+        "resume": content["resume"],
         "message_id": msg_id,
         "sent_at": datetime.datetime.now().isoformat(),
         "status": "sent"

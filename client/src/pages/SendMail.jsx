@@ -1,25 +1,60 @@
-import { useEffect, useState } from "react";
-import { sendEmail, getTemplates } from "../utils/api";
+import { useState } from "react";
 import EmailPreview from "../components/EmailPreview";
+
+const API = "http://localhost:5001";
 
 export default function SendMail() {
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
-  const [templates, setTemplates] = useState([]);
-  const [previewData, setPreviewData] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    getTemplates().then(setTemplates);
-  }, []);
+  const handlePreview = async () => {
+    try {
+      setLoading(true);
 
-  const preview = () => {
-    setPreviewData({ company, email, role });
+      const res = await fetch(`${API}/send/preview`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ company, email, role }),
+      });
+
+      if (!res.ok) throw new Error("Preview failed");
+
+      const data = await res.json();
+      setPreview(data);
+    } catch (err) {
+      console.error(err);
+      alert("Preview failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const send = async () => {
-    const res = await sendEmail({ company, email, role });
-    alert("Email sent: " + res.status);
+  const handleSend = async () => {
+    try {
+      setLoading(true);
+
+      const res = await fetch(`${API}/send`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ company, email, role }),
+      });
+
+      const data = await res.json();
+      alert("✅ Email sent!");
+      setPreview(null);
+    } catch (err) {
+      console.error(err);
+      alert("❌ Send failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -27,41 +62,39 @@ export default function SendMail() {
 
       <input
         placeholder="Company Name"
-        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
         value={company}
         onChange={(e) => setCompany(e.target.value)}
+        className="w-full p-3 border rounded-lg bg-gray-100"
       />
 
       <input
         placeholder="Company Email"
-        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        className="w-full p-3 border rounded-lg bg-gray-100"
       />
 
       <input
         placeholder="Job Role"
-        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
         value={role}
         onChange={(e) => setRole(e.target.value)}
+        className="w-full p-3 border rounded-lg bg-gray-100"
       />
 
       <button
-        onClick={preview}
-        className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-semibold transition"
+        onClick={handlePreview}
+        className="w-full bg-blue-600 text-white py-3 rounded-lg"
       >
-        Preview Email
+        {loading ? "Loading..." : "Preview Email"}
       </button>
 
-      {previewData && (
+      {preview && (
         <EmailPreview
-          data={previewData}
-          templates={templates}
-          onSend={send}
-          onClose={() => setPreviewData(null)}
+          preview={preview}
+          onSend={handleSend}
+          onClose={() => setPreview(null)}
         />
       )}
-
     </div>
   );
 }
